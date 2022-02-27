@@ -51,6 +51,7 @@ dtls_config.h
 *.cooja
 *.econotag
 *.eval-adf7xxxmb4z
+*.exe
 *.exp5438
 *.iris
 *.mbxxx
