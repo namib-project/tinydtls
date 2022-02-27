@@ -24,6 +24,10 @@
 #include "global.h"
 #include "session.h"
 
+#ifdef IS_WINDOWS
+#include <stdio.h>
+#endif
+
 #ifdef WITH_CONTIKI
 # ifndef DEBUG
 #  define DEBUG DEBUG_PRINT
@@ -73,7 +77,7 @@ void dtls_set_log_level(log_t level);
  * Writes the given text to \c stdout. The text is output only when \p
  * level is below or equal to the log level that set by
  * set_log_level(). */
-#ifdef HAVE_VPRINTF
+#if defined(HAVE_VPRINTF) || defined(IS_WINDOWS)
 #if (defined(__GNUC__))
 void dsrv_log(log_t level, const char *format, ...) __attribute__ ((format(printf, 2, 3)));
 #else /* !__GNUC__ */

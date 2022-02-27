@@ -32,7 +32,12 @@
  * $Id: sha2.c,v 1.1 2001/11/08 00:01:51 adg Exp adg $
  */
 
+#if defined(_WIN32) || defined(_WIN64)
+#include "..\tinydtls.h"
+#else
 #include "tinydtls.h"
+#endif
+
 #include <string.h>	/* memcpy()/memset() or bcopy()/bzero() */
 #ifdef HAVE_ASSERT_H
 #include <assert.h>	/* assert() */

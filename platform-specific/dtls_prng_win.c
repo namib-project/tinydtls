@@ -11,9 +11,15 @@
  *
  *******************************************************************************/
 
+#if defined(_WIN32) || defined(_WIN64)
+#include "..\tinydtls.h"
+#include "..\dtls_prng.h"
+#include "..\dtls_debug.h"
+#else
 #include "tinydtls.h"
 #include "dtls_prng.h"
 #include "dtls_debug.h"
+#endif
 
 #include <stdlib.h>
 #include <stdio.h>

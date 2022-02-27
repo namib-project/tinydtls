@@ -53,6 +53,71 @@ dtls_ticks(dtls_tick_t *t) {
 
 #endif /* RIOT_VERSION */
 
+
+
+#ifdef IS_WINDOWS
+/*
+ * Author: Ugo Varetto - ugovaretto@gmail.com
+ * This code is distributed under the terms of the Apache Software License version 2.0
+ * https://opensource.org/licenses/Apache-2.0
+*/
+
+#include <time.h>
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <winsock2.h>
+
+#if defined(_MSC_VER) || defined(_MSC_EXTENSIONS)
+  #define DELTA_EPOCH_IN_MICROSECS  11644473600000000Ui64
+#else
+  #define DELTA_EPOCH_IN_MICROSECS  11644473600000000ULL
+#endif
+
+#if defined(_MSC_VER)
+struct timezone
+{
+  int  tz_minuteswest; /* minutes W of Greenwich */
+  int  tz_dsttime;     /* type of dst correction */
+};
+
+int gettimeofday(struct timeval *tv, struct timezone *tz)
+{
+  FILETIME ft;
+  unsigned __int64 tmpres = 0;
+  static int tzflag = 0;
+
+  if (NULL != tv)
+  {
+    GetSystemTimeAsFileTime(&ft);
+
+    tmpres |= ft.dwHighDateTime;
+    tmpres <<= 32;
+    tmpres |= ft.dwLowDateTime;
+
+    tmpres /= 10;  /*convert into microseconds*/
+    /*converting file time to unix epoch*/
+    tmpres -= DELTA_EPOCH_IN_MICROSECS;
+    tv->tv_sec = (long)(tmpres / 1000000UL);
+    tv->tv_usec = (long)(tmpres % 1000000UL);
+  }
+
+  if (NULL != tz)
+  {
+    if (!tzflag)
+    {
+      _tzset();
+      tzflag++;
+    }
+    tz->tz_minuteswest = _timezone / 60;
+    tz->tz_dsttime = _daylight;
+  }
+
+  return 0;
+}
+#endif
+
+#endif /* IS_WINDOWS */
+
 #if defined(WITH_POSIX) || defined(IS_WINDOWS)
 time_t dtls_clock_offset;
 
@@ -71,7 +136,7 @@ dtls_clock_init(void) {
 }
 
 void dtls_ticks(dtls_tick_t *t) {
-#ifdef HAVE_SYS_TIME_H
+#if defined(HAVE_SYS_TIME_H) || defined(IS_WINDOWS)
   struct timeval tv;
   gettimeofday(&tv, NULL);
   *t = (tv.tv_sec - dtls_clock_offset) * DTLS_TICKS_PER_SECOND 

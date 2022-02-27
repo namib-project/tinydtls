@@ -1604,7 +1604,7 @@ dtls_0_send_hello_verify_request(dtls_context_t *ctx,
 			     dtls_ephemeral_peer_t *ephemeral_peer,
 			     uint8 *data, size_t data_length)
 {
-  uint8 buf[DTLS_RH_LENGTH + DTLS_HS_LENGTH + data_length];
+  uint8 buf[DTLS_RH_LENGTH + DTLS_HS_LENGTH + sizeof(uint16) + sizeof(uint8) + DTLS_COOKIE_LENGTH];
   uint8 *p = dtls_set_record_header(DTLS_CT_HANDSHAKE, 0, &(ephemeral_peer->rseq), buf);
 
   /* Signal DTLS version 1.0 in the record layer of ClientHello and

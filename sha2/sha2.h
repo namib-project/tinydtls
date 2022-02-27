@@ -46,7 +46,22 @@ extern "C" {
  * file.
  */
 #include <sys/types.h>
+
+#ifdef IS_WINDOWS
+#include "..\tinydtls.h"
+#else
 #include "tinydtls.h"
+#endif
+
+#ifdef IS_WINDOWS
+#include <stdint.h>
+
+typedef uint8_t u_int8_t;
+typedef uint16_t u_int16_t;
+typedef uint32_t u_int32_t;
+typedef uint64_t u_int64_t;
+
+#endif
 
 #ifdef SHA2_USE_INTTYPES_H
 

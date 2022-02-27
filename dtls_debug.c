@@ -252,7 +252,7 @@ dsrv_log(log_t level, const char *format, ...) {
   va_end(ap);
   fflush(log_fd);
 }
-#elif defined (HAVE_VPRINTF) /* WITH_CONTIKI */
+#elif defined (HAVE_VPRINTF) || defined(IS_WINDOWS) /* WITH_CONTIKI */
 void
 dsrv_log(log_t level, char *format, ...) {
   static char timebuf[32];
