@@ -240,7 +240,7 @@ dsrv_print_addr(const session_t *addr, char *buf, size_t len) {
 
 #endif /* NDEBUG */
 
-#ifndef WITH_CONTIKI
+#if !defined(WITH_CONTIKI) && !defined(_MSC_VER)
 void
 dsrv_log(log_t level, const char *format, ...) {
   static char timebuf[32];
