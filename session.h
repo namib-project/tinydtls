@@ -1,6 +1,6 @@
 /*******************************************************************************
  *
- * Copyright (c) 2011-2019 Olaf Bergmann (TZI) and others.
+ * Copyright (c) 2011-2022 Olaf Bergmann (TZI) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * and Eclipse Distribution License v. 1.0 which accompanies this distribution.
@@ -43,9 +43,14 @@ typedef struct {
 } session_t;
 #else /* ! WITH_CONTIKI && ! WITH_RIOT_SOCK */
 
+#ifdef IS_WINDOWS
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#else /* ! IS_WINDOWS */
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#endif /* ! IS_WINDOWS */
 
 typedef struct {
   socklen_t size;		/**< size of addr */

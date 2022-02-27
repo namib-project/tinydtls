@@ -53,7 +53,7 @@ dtls_ticks(dtls_tick_t *t) {
 
 #endif /* RIOT_VERSION */
 
-#ifdef WITH_POSIX
+#if defined(WITH_POSIX) || defined(IS_WINDOWS)
 time_t dtls_clock_offset;
 
 void
