@@ -64,7 +64,7 @@ dtls_ticks(dtls_tick_t *t) {
   *t = k_uptime_get();
 }
 
-#elif defined(WITH_POSIX)
+#elif defined(WITH_POSIX) || defined(IS_WINDOWS)
 
 time_t dtls_clock_offset;
 

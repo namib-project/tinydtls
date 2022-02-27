@@ -213,7 +213,7 @@ static inline void free_context(dtls_context_t *context) {
 }
 #endif /* RIOT_VERSION */
 
-#ifdef WITH_POSIX
+#if defined(WITH_POSIX) || defined(IS_WINDOWS)
 
 static inline dtls_context_t *
 malloc_context(void) {
