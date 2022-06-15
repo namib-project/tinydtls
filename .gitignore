@@ -71,3 +71,6 @@ dtls_config.h
 CMakeCache.txt
 cmake_install.cmake
 CMakeFiles
+
+# Windows build files
+*.dll
