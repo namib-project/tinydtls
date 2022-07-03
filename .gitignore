@@ -74,3 +74,19 @@ CMakeFiles
 
 # Windows build files
 *.dll
+
+# Visual Studio Build Files
+*.VC.db*
+.vs
+*.obj
+*.tlog
+*.log
+*.recipe
+*.vcxproj
+*.sln
+*.pdb
+*.vcxproj.user
+*.vcxproj.filters
+*.vcxproj.FileListAbsolute.txt
+tinydtls.dir
+Debug
