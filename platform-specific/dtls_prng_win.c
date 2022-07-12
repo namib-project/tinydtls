@@ -11,7 +11,7 @@
  *
  *******************************************************************************/
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_MSC_VER)
 #include "..\tinydtls.h"
 #include "..\dtls_prng.h"
 #include "..\dtls_debug.h"

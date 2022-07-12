@@ -47,7 +47,7 @@ extern "C" {
  */
 #include <sys/types.h>
 
-#ifdef IS_WINDOWS
+#if defined(_MSC_VER)
 #include "..\tinydtls.h"
 #else
 #include "tinydtls.h"
