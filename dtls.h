@@ -353,7 +353,7 @@ void dtls_check_retransmit(dtls_context_t *context, clock_time_t *next);
 #endif
 
 /** Generic header structure of the DTLS record layer. */
-PACK(typedef struct ) {
+PACK(typedef struct) {
   uint8 content_type;		/**< content type of the included message */
   uint16 version;		/**< Protocol version */
   uint16 epoch;		        /**< counter for cipher state changes */
@@ -382,7 +382,7 @@ PACK(typedef struct ) {
 #define DTLS_HT_NO_OPTIONAL_MESSAGE        -1
 
 /** Header structure for the DTLS handshake protocol. */
-PACK(typedef struct ) {
+PACK(typedef struct) {
   uint8 msg_type; /**< Type of handshake message  (one of DTLS_HT_) */
   uint24 length;  /**< length of this message */
   uint16 message_seq; 	/**< Message sequence number */
@@ -392,7 +392,7 @@ PACK(typedef struct ) {
 } dtls_handshake_header_t;
 
 /** Structure of the Client Hello message. */
-PACK(typedef struct ) {
+PACK(typedef struct) {
   uint16 version;	  /**< Client version */
   uint32 gmt_random;	  /**< GMT time of the random byte creation */
   unsigned char random[28];	/**< Client random bytes */
