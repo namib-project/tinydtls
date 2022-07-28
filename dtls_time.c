@@ -75,7 +75,7 @@ time_t dtls_clock_offset;
 
 void
 dtls_clock_init(void) {
-#if defined(HAVE_TIME_H) || defined(_MSC_VER)
+#ifdef HAVE_TIME_H
   dtls_clock_offset = time(NULL);
 #else
 #  ifdef __GNUC__
