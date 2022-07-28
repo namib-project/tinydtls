@@ -346,10 +346,10 @@ void dtls_check_retransmit(dtls_context_t *context, clock_time_t *next);
 
 #ifdef __GNUC__
 #define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
-#endif
-
-#ifdef _MSC_VER
+#elif defined(_MSC_VER)
 #define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))
+#else
+#error Structure packing is not available for the used compiler.
 #endif
 
 /** Generic header structure of the DTLS record layer. */
