@@ -321,9 +321,7 @@ int dtls_writev(struct dtls_context_t *ctx,
  *         if the peer already exists but is not connected yet.
  */
 int dtls_write(struct dtls_context_t *ctx, session_t *session,
-	       uint8 *buf, size_t len) {
-  return dtls_writev(ctx, session, &buf, &len, 1);
-}
+	       uint8 *buf, size_t len);
 
 /**
  * Checks sendqueue of given DTLS context object for any outstanding
