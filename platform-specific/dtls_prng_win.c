@@ -15,10 +15,11 @@
 #include "dtls_prng.h"
 #include "dtls_debug.h"
 
+#define _CRT_RAND_S
+
 #include <stdlib.h>
 #include <stdio.h>
-
-#define _CRT_RAND_S
+#include <limits.h>
 
 /**
  * Fills @p buf with @p len random bytes. Returns a non-zero
@@ -29,13 +30,14 @@ dtls_prng(unsigned char *buf, size_t len) {
   errno_t err;
   unsigned int number;
   size_t klen = len;
-  while (len--)
+  while (len--) {
     err = rand_s(&number);
     if (err != 0) {
       dtls_emerg("PRNG failed\n");
       return err;
     }
     *buf++ = number & 0xFF;
+  }
   return klen;
 }
 
