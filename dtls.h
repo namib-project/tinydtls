@@ -320,7 +320,6 @@ int dtls_writev(struct dtls_context_t *ctx,
  * @return The number of bytes written, @c -1 on error or @c 0
  *         if the peer already exists but is not connected yet.
  */
-static inline
 int dtls_write(struct dtls_context_t *ctx, session_t *session,
 	       uint8 *buf, size_t len) {
   return dtls_writev(ctx, session, &buf, &len, 1);
