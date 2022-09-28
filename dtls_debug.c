@@ -80,9 +80,19 @@ static const char *loglevels[] = {
 
 static inline size_t
 print_timestamp(char *s, size_t len, time_t t) {
+#ifdef IS_WINDOWS
+  struct tm tmp;
+  errno_t err = localtime_s(&tmp, &t);
+  if (err) {
+      printf("Invalid argument to localtime_s.");
+      exit(1);
+  }
+  return strftime(s, len, "%b %d %H:%M:%S", &tmp);
+#else
   struct tm *tmp;
   tmp = localtime(&t);
   return strftime(s, len, "%b %d %H:%M:%S", tmp);
+#endif;
 }
 
 #else /* alternative implementation: just print the timestamp */
