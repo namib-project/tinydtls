@@ -252,8 +252,6 @@ dsrv_print_addr(const session_t *addr, char *buf, size_t len) {
 
 #endif /* NDEBUG */
 
-#if !defined(WITH_CONTIKI) && !defined(_MSC_VER)
-
 static void
 dtls_logging_handler(log_t level, const char *message) {
   static char timebuf[32];
@@ -287,6 +285,8 @@ dtls_set_log_handler(dtls_log_handler_t app_handler) {
 static dtls_mutex_t static_mutex = DTLS_MUTEX_INITIALIZER;
 static char message[DTLS_DEBUG_BUF_SIZE];
 #endif /* DTLS_CONSTRAINED_STACK */
+
+#if !defined(WITH_CONTIKI) && !defined(_MSC_VER)
 
 /*
  * Caution. If DTLS_CONSTRAINED_STACK is set, then the same mutex will get

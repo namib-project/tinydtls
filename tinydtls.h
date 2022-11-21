@@ -37,6 +37,11 @@
 #define _CRT_RAND_S
 #endif
 
+#ifdef _MSC_VER
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
+
 #ifdef WITH_LWIP
 #include "platform-specific/lwip_platform.h"
 #endif /* WITH_LWIP */
