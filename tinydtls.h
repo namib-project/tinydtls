@@ -34,7 +34,7 @@
 
 #if defined(_WIN32) || defined(_WIN64)
 #define IS_WINDOWS 1
-#define _CRT_RAND_S
+// #define _CRT_RAND_S
 #endif
 
 #ifdef _MSC_VER
